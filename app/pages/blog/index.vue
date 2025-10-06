@@ -16,13 +16,13 @@
     <!-- لیست مقالات -->
     <div class="row g-4">
       <div class="col-12 col-md-6 col-lg-4" v-for="article in articles" :key="article.slug">
-        <div class="card h-100 shadow-sm">
-          <img :src="article.image" class="card-img-top" :alt="article.title">
+        <div class="card h-100 shadow-sm rounded-5">
+          <img :src="article.image" class="card-img-top rounded-top-5" :alt="article.title">
           <div class="card-body">
             <h5 class="card-title fw-bold">{{ article.title }}</h5>
             <p class="card-text text-muted">{{ article.summary }}</p>
             <!-- لینک به صفحه داینامیک مقاله -->
-            <NuxtLink :to="`/blog/${article.slug}`" class="btn btn-primary">ادامه مطلب</NuxtLink>
+            <NuxtLink :to="`/blog/${article.id}/${article.slug}`" class="btn btn-primary">ادامه مطلب</NuxtLink>
           </div>
         </div>
       </div>

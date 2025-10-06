@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-center px-4 py-2 top-bar">
         
       <div class="d-flex align-items-center">
-        <img src="" alt="لوگو" width="40" height="40" class="me-2" />
+        <img src="/images/IMG_20251005_163552_989.png" alt="لوگو" width="40" height="40" class="me-2" />
         <span class="fw-bold fs-3 text-primary">داناکو</span>
       </div>
 
@@ -34,7 +34,7 @@
           <ul class="navbar-nav py-1 px-3 ms-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link active" href="#">صفحه اصلی</a></li>
             <li class="nav-item"><a class="nav-link" href="#">خدمات</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">گالری</a></li>
+            <li class="nav-item"><NuxtLink class="nav-link" to="/gallery">گالری</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/blog">وبلاگ</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/contact">تماس</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/about">درباره ما</NuxtLink></li>
