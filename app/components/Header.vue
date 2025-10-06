@@ -33,7 +33,7 @@
 
           <ul class="navbar-nav py-1 px-3 ms-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link active" href="#">صفحه اصلی</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">خدمات</a></li>
+            <li class="nav-item"><NuxtLink class="nav-link" to="services">خدمات</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/gallery">گالری</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/blog">وبلاگ</NuxtLink></li>
             <li class="nav-item"><NuxtLink class="nav-link" to="/contact">تماس</NuxtLink></li>

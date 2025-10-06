@@ -6,59 +6,80 @@
       <h2 class="fw-bold mb-0">تور مجازی / گالری</h2>
     </div>
 
+    <!-- Navbar صفحات -->
     <ul class="nav nav-pills justify-content-center mb-5 flex-wrap">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">همه</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">کارگاه</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">فضای بازی</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">سرسره‌ها</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">کتابخانه</a>
+      <li class="nav-item" v-for="cat in categories" :key="cat">
+        <button
+          class="nav-link"
+          :class="{ active: selectedCategory === cat }"
+          @click="selectedCategory = cat"
+        >
+          {{ cat }}
+        </button>
       </li>
     </ul>
 
-    <div class="row g-4">
-      <div class="col-12 col-md-6 col-lg-4" v-for="(item, index) in galleryItems" :key="index">
+    <!-- گالری با افکت -->
+    <transition-group name="fade" tag="div" class="row g-4">
+      <div
+        class="col-12 col-md-6 col-lg-4"
+        v-for="(item) in filteredGallery"
+        :key="item.title"
+      >
         <div class="position-relative overflow-hidden rounded shadow-sm gallery-card">
-          <img :src="item.image" class="w-100 h-100 gallery-img" :alt="item.title">
-          <div class="position-absolute bottom-0 start-0 w-100 p-2 text-white" 
-               style="background: rgba(0, 0, 0, 0.5);">
+          <img :src="item.image" class="w-100 h-100 gallery-img" :alt="item.title" />
+          <div
+            class="position-absolute bottom-0 start-0 w-100 p-2 text-white"
+            style="background: rgba(0, 0, 0, 0.5);"
+          >
             <h5 class="mb-0">{{ item.title }}</h5>
           </div>
         </div>
       </div>
-    </div>
+    </transition-group>
 
   </section>
 </template>
 
 <script setup>
-const galleryItems = [
-  { title: 'کتابخانه جذاب', image: '/images/IMG_20251005_131532_142.webp' },
-  { title: 'قطار بازی', image: '/images/IMG_20251005_131532_081.webp' },
-  { title: 'کارگاه نقاشی', image: '/images/IMG_20251005_131532_516.webp' },
-  { title: 'استخر توپ', image: '/images/IMG_20251005_131531_954.webp' },
-  { title: 'فضای بازی آزاد', image: '/images/IMG_20251005_163553_023.webp' },
-  { title: 'سرسره های رنگی', image: '/images/IMG_20251005_163553_056.webp' },
-  { title: 'وسایل بازی', image: '/images/IMG_20251005_131532_495.webp' },
-]
+import { ref, computed } from 'vue'
+import { useGalleryStore } from '~/stores/useGallery'
+
+const galleryStore = useGalleryStore()
+
+const selectedCategory = ref('همه')
+
+// دسته‌بندی‌ها بر اساس داده‌های store
+const categories = computed(() => {
+  const cats = galleryStore.items.map(i => i.category)
+  return ['همه', ...new Set(cats)]
+})
+
+// فیلتر کردن بر اساس دسته‌بندی انتخاب‌شده
+const filteredGallery = computed(() => {
+  if (selectedCategory.value === 'همه') return galleryStore.items
+  return galleryStore.items.filter(item => item.category === selectedCategory.value)
+})
 </script>
 
 <style scoped>
 .gallery-card {
-  height: 250px; /* ارتفاع ثابت برای همه خانه‌ها */
+  height: 250px;
+}
+.gallery-img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
-.gallery-img {
-  object-fit: cover; /* عکس کامل پوشش بده */
-  height: 100%;      /* پر کردن ارتفاع کارت */
-  width: 100%;
+/* انیمیشن fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.97);
 }
 </style>

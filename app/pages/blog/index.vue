@@ -7,15 +7,20 @@
     </div>
 
     <ul class="nav nav-pills justify-content-center mb-5 flex-wrap">
-      <li class="nav-item"><a class="nav-link active" href="#">همه</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">ترفندهای تربیتی</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">بازی‌های آموزشی</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">اخبار / رویدادها</a></li>
+      <li class="nav-item" v-for="cat in categories" :key="cat">
+        <button 
+          class="nav-link" 
+          :class="{ active: selectedCategory === cat }"
+          @click="selectedCategory = cat"
+        >
+          {{ cat }}
+        </button>
+      </li>
     </ul>
 
     <!-- لیست مقالات -->
     <div class="row g-4">
-      <div class="col-12 col-md-6 col-lg-4" v-for="article in articles" :key="article.slug">
+      <div class="col-12 col-md-6 col-lg-4" v-for="article in filteredArticles" :key="article.slug">
         <div class="card h-100 shadow-sm rounded-5">
           <img :src="article.image" class="card-img-top rounded-top-5" :alt="article.title">
           <div class="card-body">
@@ -32,5 +37,22 @@
 </template>
 
 <script setup>
-import articles from '~/data/articles.js'
+import { ref, computed } from 'vue'
+import { useBlogStore } from '~/stores/useArticles'
+
+const blogStore = useBlogStore()
+
+const selectedCategory = ref('همه')
+
+// ساختار دسته‌بندی‌ها داینامیک بر اساس داده‌های store
+const categories = computed(() => {
+  const cats = blogStore.articles.map(a => a.category)
+  return ['همه', ...new Set(cats)]
+})
+
+// فیلتر مقالات بر اساس دسته‌بندی انتخاب‌شده
+const filteredArticles = computed(() => {
+  if (selectedCategory.value === 'همه') return blogStore.articles
+  return blogStore.articles.filter(a => a.category === selectedCategory.value)
+})
 </script>
