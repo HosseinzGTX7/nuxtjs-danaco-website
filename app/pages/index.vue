@@ -9,8 +9,8 @@
           تجربه‌ای شاد و آموزشی برای کودکان با محیطی ایمن و جذاب. سرگرمی، یادگیری و خاطرات شیرین در یکجا!
         </p>
         <div class="mt-4">
-          <button class="btn btn-primary ms-2">ورود / ثبت نام</button>
-          <button class="btn btn-outline-primary">اطلاعات بیشتر</button>
+          <NuxtLink to="/auth/login" class="btn btn-primary ms-2">ورود / ثبت نام</NuxtLink>
+          <NuxtLink to="/" class="btn btn-outline-primary">اطلاعات بیشتر</NuxtLink>
         </div>
       </div>
       <div class="col-md-6 text-center">

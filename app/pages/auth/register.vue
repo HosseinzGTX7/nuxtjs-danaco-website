@@ -93,7 +93,7 @@
 
         <p class="text-center mt-3">
           قبلاً حساب کاربری ساخته‌اید؟ 
-          <NuxtLink to="/login">ورود</NuxtLink>
+          <NuxtLink to="/auth/login">ورود</NuxtLink>
         </p>
       </Form>
     </div>
