@@ -7,5 +7,10 @@ export default defineNuxtConfig({
     'bootstrap-icons/font/bootstrap-icons.css',
     '@/assets/css/fonts.css'
   ],
-  plugins: [{ src: '~/plugins/bootstrap.client.ts', mode: 'client' }]
+  plugins: [{ src: '~/plugins/bootstrap.client.ts', mode: 'client' }
+  ],
+
+  modules: [
+    '@pinia/nuxt'
+  ]
 })

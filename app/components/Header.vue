@@ -30,18 +30,26 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav py-1 px-3 ms-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <NuxtLink to="/" class="nav-link" exact-active-class="active">صفحه اصلی</NuxtLink></li>
+    <li class="nav-item">
+      <NuxtLink to="/services" class="nav-link" exact-active-class="active">خدمات</NuxtLink></li>
+    <li class="nav-item">
+      <NuxtLink to="/gallery" class="nav-link" exact-active-class="active">گالری</NuxtLink></li>
+    <li class="nav-item">
+      <NuxtLink to="/blog" class="nav-link" exact-active-class="active">وبلاگ</NuxtLink></li>
+    <li class="nav-item">
+      <NuxtLink to="/contact" class="nav-link" exact-active-class="active">تماس</NuxtLink></li>
+    <li class="nav-item">
+      <NuxtLink to="/about" class="nav-link" exact-active-class="active">درباره ما</NuxtLink></li>
+  </ul>
 
-          <ul class="navbar-nav py-1 px-3 ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link active" href="#">صفحه اصلی</a></li>
-            <li class="nav-item"><NuxtLink class="nav-link" to="services">خدمات</NuxtLink></li>
-            <li class="nav-item"><NuxtLink class="nav-link" to="/gallery">گالری</NuxtLink></li>
-            <li class="nav-item"><NuxtLink class="nav-link" to="/blog">وبلاگ</NuxtLink></li>
-            <li class="nav-item"><NuxtLink class="nav-link" to="/contact">تماس</NuxtLink></li>
-            <li class="nav-item"><NuxtLink class="nav-link" to="/about">درباره ما</NuxtLink></li>
-          </ul>
+  <span class="text-dark fw-bold p-1 me-2 mt-lg-0">
+    0912-123-4567 <i class="bi bi-telephone-inbound"></i>
+  </span>
+</div>
 
-          <span class="text-dark fw-bold p-1 me-2 mt-lg-0">0912-123-4567 <i class="bi bi-telephone-inbound"></i></span>
-        </div>
       </div>
     </nav>
   </header>
@@ -56,7 +64,7 @@
 
 /* بخش منو */
 .main-nav {
-  background-color: #898989;
+  background-color: #a3a3a3;
 }
 .nav-link {
   color: #e4e3e3 !important;

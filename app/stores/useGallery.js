@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useGalleryStore = defineStore('gallery', {
   state: () => ({
-    galleryItems: [
+    items: [
       { title: 'کتابخانه جذاب', image: '/images/IMG_20251005_131532_142.webp', category: 'کتابخانه' },
       { title: 'قطار بازی', image: '/images/IMG_20251005_131532_081.webp', category: 'فضای بازی' },
       { title: 'کارگاه نقاشی', image: '/images/IMG_20251005_131532_516.webp', category: 'کارگاه' },
@@ -13,9 +13,17 @@ export const useGalleryStore = defineStore('gallery', {
     ]
   }),
   getters: {
-    getItemsByCategory: (state) => (category) => {
-      if (category === 'همه') return state.galleryItems
-      return state.galleryItems.filter(item => item.category === category)
+    // گرفتن آیتم‌ها بر اساس دسته‌بندی
+    itemsByCategory: (state) => {
+      return (category) => {
+        if (category === 'همه') return state.items
+        return state.items.filter(item => item.category === category)
+      }
+    },
+    // لیست دسته‌بندی‌های موجود
+    categories: (state) => {
+      const cats = state.items.map(item => item.category)
+      return ['همه', ...new Set(cats)]
     }
   }
 })

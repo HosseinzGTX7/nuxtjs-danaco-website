@@ -6,7 +6,7 @@
       <h2 class="fw-bold mb-0">تور مجازی / گالری</h2>
     </div>
 
-    <!-- Navbar صفحات -->
+    <!-- دسته‌بندی‌ها -->
     <ul class="nav nav-pills justify-content-center mb-5 flex-wrap">
       <li class="nav-item" v-for="cat in categories" :key="cat">
         <button
@@ -19,11 +19,11 @@
       </li>
     </ul>
 
-    <!-- گالری با افکت -->
+    <!-- لیست گالری -->
     <transition-group name="fade" tag="div" class="row g-4">
       <div
         class="col-12 col-md-6 col-lg-4"
-        v-for="(item) in filteredGallery"
+        v-for="item in filteredGallery"
         :key="item.title"
       >
         <div class="position-relative overflow-hidden rounded shadow-sm gallery-card">
@@ -49,17 +49,11 @@ const galleryStore = useGalleryStore()
 
 const selectedCategory = ref('همه')
 
-// دسته‌بندی‌ها بر اساس داده‌های store
-const categories = computed(() => {
-  const cats = galleryStore.items.map(i => i.category)
-  return ['همه', ...new Set(cats)]
-})
+// گرفتن دسته‌بندی‌ها از getter استور
+const categories = computed(() => galleryStore.categories)
 
-// فیلتر کردن بر اساس دسته‌بندی انتخاب‌شده
-const filteredGallery = computed(() => {
-  if (selectedCategory.value === 'همه') return galleryStore.items
-  return galleryStore.items.filter(item => item.category === selectedCategory.value)
-})
+// آیتم‌های فیلترشده از getter استور
+const filteredGallery = computed(() => galleryStore.itemsByCategory(selectedCategory.value))
 </script>
 
 <style scoped>
