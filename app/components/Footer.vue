@@ -33,9 +33,9 @@
         <div class="col-12 col-md-3 mb-4">
           <h5 class="fw-bold mb-3">قوانین سایت</h5>
           <ul class="list-unstyled p-0">
-            <li><NuxtLink to="/terms" class="footer-link text-decoration-none">شرایط استفاده</NuxtLink></li>
-            <li><NuxtLink to="/privacy" class="footer-link text-decoration-none">حریم خصوصی</NuxtLink></li>
-            <li><NuxtLink to="/faq" class="footer-link text-decoration-none">سؤالات متداول</NuxtLink></li>
+            <li><NuxtLink to="/" class="footer-link text-decoration-none">شرایط استفاده</NuxtLink></li>
+            <li><NuxtLink to="/" class="footer-link text-decoration-none">حریم خصوصی</NuxtLink></li>
+            <li><NuxtLink to="/" class="footer-link text-decoration-none">سؤالات متداول</NuxtLink></li>
           </ul>
         </div>
 

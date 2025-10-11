@@ -1,6 +1,5 @@
 <template>
   <section class="container my-5">
-
     <div class="d-flex align-items-center mb-5">
       <i class="bi bi-star-fill fs-2 text-warning ms-2"></i>
       <h2 class="fw-bold mb-0">خدمات ویژه</h2>
@@ -8,7 +7,11 @@
 
     <!-- کارت‌های خدمات -->
     <div class="row g-4 mb-5">
-      <div class="col-12 col-md-4" v-for="(service, index) in servicesStore.services" :key="index">
+      <div
+        class="col-12 col-md-4"
+        v-for="(service, index) in servicesStore.services"
+        :key="index"
+      >
         <div class="card h-100 shadow-sm text-center">
           <img :src="service.image" class="card-img-top" :alt="service.title" />
           <div class="card-body">
@@ -45,14 +48,15 @@
 
       <p class="text-muted mt-2">ورودی ساعتی، جشن تولد و کارگاه آموزشی</p>
     </div>
-
   </section>
 </template>
 
 <script setup>
-import { useServicesStore } from '~/stores/useServices'
 
-const servicesStore = useServicesStore()
+import { useServicesStore } from "~/stores/useServicesStore";
+
+const servicesStore = useServicesStore();
+
 </script>
 
 <style scoped>
@@ -86,7 +90,8 @@ const servicesStore = useServicesStore()
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.modern-table td, .modern-table th {
+.modern-table td,
+.modern-table th {
   border: none;
   padding: 0.75rem 1.25rem;
 }

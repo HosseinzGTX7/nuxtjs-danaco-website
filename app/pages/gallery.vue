@@ -1,6 +1,5 @@
 <template>
   <section class="container my-5">
-
     <div class="d-flex align-items-center mb-4">
       <i class="bi bi-images fs-2 text-primary ms-2"></i>
       <h2 class="fw-bold mb-0">تور مجازی / گالری</h2>
@@ -26,34 +25,41 @@
         v-for="item in filteredGallery"
         :key="item.title"
       >
-        <div class="position-relative overflow-hidden rounded shadow-sm gallery-card">
-          <img :src="item.image" class="w-100 h-100 gallery-img" :alt="item.title" />
+        <div
+          class="position-relative overflow-hidden rounded shadow-sm gallery-card"
+        >
+          <img
+            :src="item.image"
+            class="w-100 h-100 gallery-img"
+            :alt="item.title"
+          />
           <div
             class="position-absolute bottom-0 start-0 w-100 p-2 text-white"
-            style="background: rgba(0, 0, 0, 0.5);"
+            style="background: rgba(0, 0, 0, 0.5)"
           >
             <h5 class="mb-0">{{ item.title }}</h5>
           </div>
         </div>
       </div>
     </transition-group>
-
   </section>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useGalleryStore } from '~/stores/useGallery'
+import { ref, computed } from "vue";
+import { useGalleryStore } from "~/stores/useGalleryStore";
 
-const galleryStore = useGalleryStore()
+const galleryStore = useGalleryStore();
 
-const selectedCategory = ref('همه')
+const selectedCategory = ref("همه");
 
 // گرفتن دسته‌بندی‌ها از getter استور
-const categories = computed(() => galleryStore.categories)
+const categories = computed(() => galleryStore.categories);
 
 // آیتم‌های فیلترشده از getter استور
-const filteredGallery = computed(() => galleryStore.itemsByCategory(selectedCategory.value))
+const filteredGallery = computed(() =>
+  galleryStore.itemsByCategory(selectedCategory.value)
+);
 </script>
 
 <style scoped>
