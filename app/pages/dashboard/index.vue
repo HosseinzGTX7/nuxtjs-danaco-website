@@ -22,9 +22,12 @@
 
           <!-- محتوای تب‌ها -->
           <div>
+
             <ProfileTab v-if="activeTab==='profile'" />
             <WalletTab v-if="activeTab==='wallet'" :walletBalance="walletBalance" :transactions="transactions" @open-modal="openModal"/>
             <HistoryTab v-if="activeTab==='history'"/>
+            <ChildrenTab v-if="activeTab === 'children'"/>
+
           </div>
         </div>
       </div>
@@ -38,6 +41,7 @@ import { useUserStore } from '~/stores/useUserStore'
 import ProfileTab from '~/pages/dashboard/profileTab.vue'
 import WalletTab from '~/pages/dashboard/walletTab.vue'
 import HistoryTab from '~/pages/dashboard/historyTab.vue'
+import ChildrenTab from '~/pages/dashboard/childrenTab.vue'
 
 const userStore = useUserStore()
 const user = computed(() => userStore.user)
