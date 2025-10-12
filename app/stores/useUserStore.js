@@ -6,7 +6,7 @@ export const useUserStore = defineStore('user', () => {
   // دادهٔ فیک کاربر (قابل جایگزینی با پاسخ API بعداً)
   const user = ref({
     id: 1,
-    name: 'علی رضایی',
+    name: 'علی رایی',
     email: 'ali@example.com',
     phone: '09121234567',
     avatar: '/images/IMG_20251005_131532_368.webp', // مسیر آواتار (داخل public/images بذار)
