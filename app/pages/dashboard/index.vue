@@ -28,6 +28,7 @@
             <HistoryTab v-if="activeTab==='history'"/>
             <ChildrenTab v-if="activeTab === 'children'"/>
             <RewardsTab v-if="activeTab === 'rewards'"/>
+            <MessagesTab v-if="activeTab === 'messages'"/>
 
           </div>
         </div>
@@ -44,6 +45,7 @@ import WalletTab from '~/pages/dashboard/walletTab.vue'
 import HistoryTab from '~/pages/dashboard/historyTab.vue'
 import ChildrenTab from '~/pages/dashboard/childrenTab.vue'
 import RewardsTab from '~/pages/dashboard/rewardsTab.vue'
+import MessagesTab from '~/pages/dashboard/messagesTab.vue'
 
 const userStore = useUserStore()
 const user = computed(() => userStore.user)

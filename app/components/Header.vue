@@ -8,7 +8,8 @@
         <span class="fw-bold fs-3 text-primary">داناکو</span>
       </div>
 
-      <button class="btn btn-primary fw-bold rounded-pill">رزرو اتاق بازی</button>
+      <NuxtLink to="/dashboard" class="btn btn-primary fw-bold rounded-pill">داشبورد</NuxtLink>
+
     </div>
 
     <!-- بخش منو -->

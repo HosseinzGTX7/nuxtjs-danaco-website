@@ -287,4 +287,13 @@ const closeModal = () => {
   border: 2px dashed #ccc;
   border-radius: 10px;
 }
+
+.children-tab .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.children-tab .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
 </style>
