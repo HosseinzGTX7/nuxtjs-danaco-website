@@ -30,7 +30,7 @@
       <div class="col-md-4 col-sm-6">
         <div
           class="card text-center border-dashed p-4 d-flex align-items-center justify-content-center"
-          style="cursor:pointer; height: 230px;"
+          style="cursor:pointer; height: 285px;"
           @click="openAddModal"
         >
           <i class="bi bi-plus-circle fs-1 text-secondary"></i>
@@ -48,11 +48,11 @@
       aria-hidden="true"
       ref="modalRef"
     >
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="childModalLabel">
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               {{ isEditing ? 'ویرایش اطلاعات فرزند' : 'افزودن فرزند جدید' }}
             </h5>
           </div>
@@ -73,30 +73,61 @@
               <div class="invalid-feedback text-start">{{ errors.photo }}</div>
             </div>
 
+            <!-- نام -->
             <div class="mb-3">
-               <label class="form-label">نام</label>
-               <input type="text" v-model="form.firstName" class="form-control" :class="{ 'is-invalid': errors.firstName }" />
+              <label class="form-label">نام</label>
+              <input type="text" v-model="form.firstName" class="form-control" :class="{ 'is-invalid': errors.firstName }" />
               <div class="invalid-feedback">{{ errors.firstName }}</div>
             </div>
 
+            <!-- نام خانوادگی -->
             <div class="mb-3">
-               <label class="form-label">نام خانوادگی</label>
-               <input type="text" v-model="form.lastName" class="form-control" :class="{ 'is-invalid': errors.lastName }" />
+              <label class="form-label">نام خانوادگی</label>
+              <input type="text" v-model="form.lastName" class="form-control" :class="{ 'is-invalid': errors.lastName }" />
               <div class="invalid-feedback">{{ errors.lastName }}</div>
             </div>
 
+            <!-- سن -->
             <div class="mb-3">
-               <label class="form-label">سن</label>
-               <input type="number" v-model="form.age" class="form-control" min="1" max="18" :class="{ 'is-invalid': errors.age }" />
+              <label class="form-label">سن</label>
+              <input type="number" v-model="form.age" class="form-control" min="1" max="18" :class="{ 'is-invalid': errors.age }" />
               <div class="invalid-feedback">{{ errors.age }}</div>
             </div>
 
+            <!-- جنسیت -->
             <div class="mb-3">
               <label class="form-label">جنسیت</label>
               <select v-model="form.gender" class="form-select">
                 <option value="male">پسر</option>
                 <option value="female">دختر</option>
               </select>
+            </div>
+
+            <!-- تاریخ تولد -->
+            <div class="mb-3">
+              <label class="form-label">تاریخ تولد</label>
+              <input type="date" v-model="form.birthDate" class="form-control" :class="{ 'is-invalid': errors.birthDate }" />
+              <div class="invalid-feedback">{{ errors.birthDate }}</div>
+            </div>
+
+            <!-- شماره تماس -->
+            <div class="mb-3">
+              <label class="form-label">شماره تماس</label>
+              <input type="tel" v-model="form.phone" class="form-control" placeholder="مثلاً 09123456789" :class="{ 'is-invalid': errors.phone }" />
+              <div class="invalid-feedback">{{ errors.phone }}</div>
+            </div>
+
+            <!-- کد ملی -->
+            <div class="mb-3">
+              <label class="form-label">کد ملی</label>
+              <input type="text" v-model="form.nationalId" class="form-control" maxlength="10" :class="{ 'is-invalid': errors.nationalId }" />
+              <div class="invalid-feedback">{{ errors.nationalId }}</div>
+            </div>
+
+            <!-- توضیحات -->
+            <div class="mb-3">
+              <label class="form-label">توضیحات</label>
+              <textarea v-model="form.description" class="form-control" rows="3"></textarea>
             </div>
           </div>
 
@@ -117,22 +148,36 @@
 import { ref, onMounted, nextTick } from 'vue'
 
 const children = ref([
-  { firstName: 'محمد', lastName: 'رضایی', age: 7, gender: 'male', photo: '' },
-  { firstName: 'نگار', lastName: 'احمدی', age: 5, gender: 'female', photo: '' }
+  { firstName: 'محمد', lastName: 'رضایی', age: 7, gender: 'male', photo: '', birthDate: '', phone: '', nationalId: '', description: '' },
+  { firstName: 'نگار', lastName: 'احمدی', age: 5, gender: 'female', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
 ])
 
-const form = ref({ firstName: '', lastName: '', age: '', gender: 'male', photo: '' })
-const isEditing = ref(false)
-const editingIndex = ref(null)
-const modalRef = ref(null)
-let bsModal = null
+const form = ref({
+  firstName: '',
+  lastName: '',
+  age: '',
+  gender: 'male',
+  photo: '',
+  birthDate: '',
+  phone: '',
+  nationalId: '',
+  description: ''
+})
 
 const errors = ref({
   firstName: '',
   lastName: '',
   age: '',
-  photo: ''
+  photo: '',
+  birthDate: '',
+  phone: '',
+  nationalId: ''
 })
+
+const isEditing = ref(false)
+const editingIndex = ref(null)
+const modalRef = ref(null)
+let bsModal = null
 
 onMounted(async () => {
   const bootstrap = await import('bootstrap')
@@ -143,8 +188,8 @@ onMounted(async () => {
 
 const openAddModal = () => {
   isEditing.value = false
-  form.value = { firstName: '', lastName: '', age: '', gender: 'male', photo: '' }
-  errors.value = { firstName: '', lastName: '', age: '', photo: '' }
+  form.value = { firstName: '', lastName: '', age: '', gender: 'male', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
+  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
   openModal()
 }
 
@@ -152,7 +197,7 @@ const editChild = (index) => {
   isEditing.value = true
   editingIndex.value = index
   form.value = { ...children.value[index] }
-  errors.value = { firstName: '', lastName: '', age: '', photo: '' }
+  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
   openModal()
 }
 
@@ -162,7 +207,7 @@ const deleteChild = (index) => {
 
 const validateForm = () => {
   let isValid = true
-  errors.value = { firstName: '', lastName: '', age: '', photo: '' }
+  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
 
   if (!form.value.firstName.trim()) {
     errors.value.firstName = 'نام الزامی است'
@@ -175,13 +220,28 @@ const validateForm = () => {
   }
 
   const age = Number(form.value.age)
-  if (!age || age < 1 || age > 18) {
-    errors.value.age = 'سن باید بین ۱ تا ۱۸ باشد'
+  if (!age || age < 1 || age > 12) {
+    errors.value.age = 'سن باید بین ۱ تا ۱۲ باشد'
     isValid = false
   }
 
   if (!form.value.photo) {
     errors.value.photo = 'بارگذاری عکس الزامی است'
+    isValid = false
+  }
+
+  if (!form.value.birthDate) {
+    errors.value.birthDate = 'تاریخ تولد الزامی است'
+    isValid = false
+  }
+
+  if (!form.value.phone || !/^09\d{9}$/.test(form.value.phone)) {
+    errors.value.phone = 'شماره تماس معتبر نیست'
+    isValid = false
+  }
+
+  if (!form.value.nationalId || !/^\d{10}$/.test(form.value.nationalId)) {
+    errors.value.nationalId = 'کد ملی باید ۱۰ رقم باشد'
     isValid = false
   }
 
@@ -205,7 +265,7 @@ const onPhotoChange = (e) => {
     const reader = new FileReader()
     reader.onload = () => {
       form.value.photo = reader.result
-      errors.value.photo = '' // پاک کردن خطا در صورت بارگذاری موفق
+      errors.value.photo = ''
     }
     reader.readAsDataURL(file)
   }
