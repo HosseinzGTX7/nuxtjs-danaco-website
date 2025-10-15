@@ -54,7 +54,7 @@
           <NuxtLink to="/auth/register">ثبت‌نام</NuxtLink>
         </p>
         <p class="mb-0 text-center">
-          <NuxtLink to="/forgot-password" class="text-decoration-none">رمز عبور خود را فراموش کرده‌اید؟</NuxtLink>
+          <NuxtLink to="/" class="text-decoration-none">رمز عبور خود را فراموش کرده‌اید؟</NuxtLink>
         </p>
       </Form>
     </div>

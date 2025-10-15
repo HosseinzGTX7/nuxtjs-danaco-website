@@ -15,14 +15,14 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in historyList" :key="index">
-            <td>
+            <td class="activity-type">
               <i :class="activityIcon(item.type)" class="me-2"></i>
               {{ item.type }}
             </td>
-            <td>{{ item.startTime }}</td>
-            <td>{{ item.endTime }}</td>
+            <td class="activity-type">{{ item.startTime }}</td>
+            <td class="activity-type">{{ item.endTime }}</td>
             <td>{{ item.date }}</td>
-            <td>{{ item.total }}</td>
+            <td class="activity-type">{{ item.total }}</td>
           </tr>
         </tbody>
       </table>
@@ -78,4 +78,20 @@ function activityIcon(type) {
 .table td i {
   color: #0d6efd;
 }
+
+/* حالت پیش‌فرض دسکتاپ */
+.activity-type {
+  min-width: 150px;
+}
+
+/* موبایل */
+@media (max-width: 576px) {
+  .activity-type {
+    white-space: nowrap;
+    min-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 </style>

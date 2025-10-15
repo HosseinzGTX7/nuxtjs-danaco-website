@@ -106,9 +106,19 @@
             <!-- تاریخ تولد -->
             <div class="mb-3">
               <label class="form-label">تاریخ تولد</label>
-              <input type="date" v-model="form.birthDate" class="form-control" :class="{ 'is-invalid': errors.birthDate }" />
+
+              <DatePicker
+                v-model="form.birthDate"
+                format="jYYYY/jMM/jDD"
+                placeholder="انتخاب تاریخ تولد"
+                class="form-control"
+                :class="{ 'is-invalid': errors.birthDate }"
+                color="#42b983"
+              />
+
               <div class="invalid-feedback">{{ errors.birthDate }}</div>
             </div>
+
 
             <!-- شماره تماس -->
             <div class="mb-3">

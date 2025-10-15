@@ -40,12 +40,12 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useUserStore } from '~/stores/useUserStore'
-import ProfileTab from '~/pages/dashboard/profileTab.vue'
-import WalletTab from '~/pages/dashboard/walletTab.vue'
-import HistoryTab from '~/pages/dashboard/historyTab.vue'
-import ChildrenTab from '~/pages/dashboard/childrenTab.vue'
-import RewardsTab from '~/pages/dashboard/rewardsTab.vue'
-import MessagesTab from '~/pages/dashboard/messagesTab.vue'
+import ProfileTab from '~/components/dashboard/profileTab.vue'
+import WalletTab from '~/components/dashboard/walletTab.vue'
+import HistoryTab from '~/components/dashboard/historyTab.vue'
+import ChildrenTab from '~/components/dashboard/childrenTab.vue'
+import RewardsTab from '~/components/dashboard/rewardsTab.vue'
+import MessagesTab from '~/components/dashboard/messagesTab.vue'
 
 const userStore = useUserStore()
 const user = computed(() => userStore.user)

@@ -3,7 +3,7 @@
     <!-- بخش خوش آمدگویی -->
     <div class="row align-items-center mb-5 bg-light p-4 rounded shadow-sm">
       <div class="col-md-6">
-        <h1 class="fw-bold">به شهربازی داناکو خوش آمدید!</h1>
+        <h1 class="fw-bold welcome-title">به خانه بازی داناکو خوش آمدید!</h1>
         <p class="text-muted mt-3">
           تجربه‌ای شاد و آموزشی برای کودکان با محیطی ایمن و جذاب. سرگرمی،
           یادگیری و خاطرات شیرین در یکجا!
@@ -12,7 +12,7 @@
           <NuxtLink to="/auth/login" class="btn btn-primary ms-2"
             >ورود / ثبت نام</NuxtLink
           >
-          <NuxtLink to="/" class="btn btn-outline-primary"
+          <NuxtLink to="/about" class="btn btn-outline-primary"
             >اطلاعات بیشتر</NuxtLink
           >
         </div>
@@ -20,7 +20,7 @@
       <div class="col-md-6 text-center">
         <img
           src="/images/IMG_20251005_163552_376.png"
-          class="img-fluid rounded"
+          class="img-fluid rounded m-4"
           alt="شهربازی"
         />
       </div>
@@ -223,4 +223,17 @@ onMounted(() => {
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.welcome-title {
+  font-size: 2rem; /* اندازه پیش‌فرض برای دسکتاپ */
+}
+
+/* حالت موبایل */
+@media (max-width: 576px) {
+  .welcome-title {
+    font-size: 1.2rem; /* فونت کوچکتر برای موبایل */
+  }
+}
+
 </style>
+

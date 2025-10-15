@@ -3,7 +3,7 @@
     <!-- موجودی -->
     <div class="text-center mb-4 p-3 border rounded shadow-sm">
       <h5>موجودی فعلی:</h5>
-      <h3 class="fw-bold text-success">{{ walletBalance.toLocaleString() }} تومان</h3>
+      <h3 class="fw-bold text-success">{{ formatNumber(walletBalance) }} تومان</h3>
     </div>
 
     <!-- تاریخچه تراکنش -->
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr v-for="(t, i) in transactions" :key="i">
-            <td>{{ t.amount.toLocaleString() }} تومان</td>
+            <td>{{ formatNumber(t.amount) }} تومان</td>
             <td :class="transactionClass(t.type)">{{ t.type }}</td>
             <td>{{ t.date }}</td>
           </tr>
@@ -58,8 +58,12 @@
                 <label class="form-label">مقدار شارژ</label>
                 <select class="form-select" v-model="chargeAmount">
                   <option disabled value="">انتخاب کنید</option>
-                  <option v-for="a in [100000,200000,300000,400000,500000]" :key="a" :value="a">
-                    {{ a.toLocaleString() }} تومان
+                  <option
+                    v-for="a in [100000,200000,300000,400000,500000]"
+                    :key="a"
+                    :value="a"
+                  >
+                    {{ formatNumber(a) }} تومان
                   </option>
                   <option value="custom">مبلغ دلخواه</option>
                 </select>
@@ -80,7 +84,7 @@
             <!-- اطلاعات تایید شده و پرداخت آنلاین -->
             <div v-if="confirmed" class="border-top pt-3 text-center">
               <p class="mb-1">نوع شارژ: <strong>{{ chargeType }}</strong></p>
-              <p class="mb-3">مبلغ: <strong>{{ finalAmount.toLocaleString() }} تومان</strong></p>
+              <p class="mb-3">مبلغ: <strong>{{ formatNumber(finalAmount) }} تومان</strong></p>
               <button class="btn btn-primary w-100">پرداخت آنلاین</button>
             </div>
           </div>
@@ -97,6 +101,10 @@ const props = defineProps({
   walletBalance: Number,
   transactions: Array
 })
+
+function formatNumber(n) {
+  return typeof n === 'number' ? n.toLocaleString('fa-IR') : '۰';
+}
 
 let Modal = null
 if (process.client) {
