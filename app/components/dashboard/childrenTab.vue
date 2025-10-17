@@ -57,96 +57,97 @@
             </h5>
           </div>
 
-          <div class="modal-body">
-            <div class="mb-3 text-center">
-              <img
-                :src="form.photo || '/images/computer-icons-user-profile.png'"
-                class="rounded-circle mb-4"
-                style="width:100px;height:100px;object-fit:cover;"
-              />
-              <input
-                type="file"
-                class="form-control"
-                @change="onPhotoChange"
-                :class="{ 'is-invalid': errors.photo }"
-              />
-              <div class="invalid-feedback text-start">{{ errors.photo }}</div>
+          <Form :validation-schema="schema" @submit="saveChild">
+            <div class="modal-body">
+              <!-- عکس -->
+              <div class="mb-3 text-center">
+                <img
+                  :src="values.photo || '/images/computer-icons-user-profile.png'"
+                  class="rounded-circle mb-4"
+                  style="width:100px;height:100px;object-fit:cover;"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  @change="onPhotoChange"
+                />
+                <ErrorMessage name="photo" class="text-danger text-start small mt-1"/>
+              </div>
+
+              <!-- نام -->
+              <div class="mb-3">
+                <label class="form-label">نام</label>
+                <Field name="firstName" class="form-control"/>
+                <ErrorMessage name="firstName" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- نام خانوادگی -->
+              <div class="mb-3">
+                <label class="form-label">نام خانوادگی</label>
+                <Field name="lastName" class="form-control"/>
+                <ErrorMessage name="lastName" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- سن -->
+              <div class="mb-3">
+                <label class="form-label">سن</label>
+                <Field name="age" type="number" class="form-control"/>
+                <ErrorMessage name="age" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- جنسیت -->
+              <div class="mb-3">
+                <label class="form-label">جنسیت</label>
+                <Field name="gender" as="select" class="form-select">
+                  <option value="male">پسر</option>
+                  <option value="female">دختر</option>
+                </Field>
+                <ErrorMessage name="gender" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- تاریخ تولد -->
+              <div class="mb-3">
+                <label class="form-label">تاریخ تولد</label>
+                <Field name="birthDate" v-slot="{ field }">
+                  <DatePicker
+                    v-bind="field"
+                    format="jYYYY/jMM/jDD"
+                    placeholder="انتخاب تاریخ تولد"
+                    class="form-control"
+                    color="#42b983"
+                  />
+                </Field>
+                <ErrorMessage name="birthDate" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- شماره تماس -->
+              <div class="mb-3">
+                <label class="form-label">شماره تماس</label>
+                <Field name="phone" class="form-control" placeholder="مثلاً 09123456789"/>
+                <ErrorMessage name="phone" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- کد ملی -->
+              <div class="mb-3">
+                <label class="form-label">کد ملی</label>
+                <Field name="nationalId" class="form-control" maxlength="10"/>
+                <ErrorMessage name="nationalId" class="text-danger small mt-1"/>
+              </div>
+
+              <!-- توضیحات -->
+              <div class="mb-3">
+                <label class="form-label">توضیحات</label>
+                <Field name="description" as="textarea" class="form-control" rows="3"/>
+                <ErrorMessage name="description" class="text-danger small mt-1"/>
+              </div>
             </div>
 
-            <!-- نام -->
-            <div class="mb-3">
-              <label class="form-label">نام</label>
-              <input type="text" v-model="form.firstName" class="form-control" :class="{ 'is-invalid': errors.firstName }" />
-              <div class="invalid-feedback">{{ errors.firstName }}</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+              <button type="submit" class="btn btn-primary" :disabled="Object.keys(errors).length">تایید</button>
             </div>
+          </Form>
 
-            <!-- نام خانوادگی -->
-            <div class="mb-3">
-              <label class="form-label">نام خانوادگی</label>
-              <input type="text" v-model="form.lastName" class="form-control" :class="{ 'is-invalid': errors.lastName }" />
-              <div class="invalid-feedback">{{ errors.lastName }}</div>
-            </div>
-
-            <!-- سن -->
-            <div class="mb-3">
-              <label class="form-label">سن</label>
-              <input type="number" v-model="form.age" class="form-control" min="1" max="18" :class="{ 'is-invalid': errors.age }" />
-              <div class="invalid-feedback">{{ errors.age }}</div>
-            </div>
-
-            <!-- جنسیت -->
-            <div class="mb-3">
-              <label class="form-label">جنسیت</label>
-              <select v-model="form.gender" class="form-select">
-                <option value="male">پسر</option>
-                <option value="female">دختر</option>
-              </select>
-            </div>
-
-            <!-- تاریخ تولد -->
-            <div class="mb-3">
-              <label class="form-label">تاریخ تولد</label>
-
-              <DatePicker
-                v-model="form.birthDate"
-                format="jYYYY/jMM/jDD"
-                placeholder="انتخاب تاریخ تولد"
-                class="form-control"
-                :class="{ 'is-invalid': errors.birthDate }"
-                color="#42b983"
-              />
-
-              <div class="invalid-feedback">{{ errors.birthDate }}</div>
-            </div>
-
-
-            <!-- شماره تماس -->
-            <div class="mb-3">
-              <label class="form-label">شماره تماس</label>
-              <input type="tel" v-model="form.phone" class="form-control" placeholder="مثلاً 09123456789" :class="{ 'is-invalid': errors.phone }" />
-              <div class="invalid-feedback">{{ errors.phone }}</div>
-            </div>
-
-            <!-- کد ملی -->
-            <div class="mb-3">
-              <label class="form-label">کد ملی</label>
-              <input type="text" v-model="form.nationalId" class="form-control" maxlength="10" :class="{ 'is-invalid': errors.nationalId }" />
-              <div class="invalid-feedback">{{ errors.nationalId }}</div>
-            </div>
-
-            <!-- توضیحات -->
-            <div class="mb-3">
-              <label class="form-label">توضیحات</label>
-              <textarea v-model="form.description" class="form-control" rows="3"></textarea>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
-            <button type="button" class="btn btn-primary" @click="saveChild">
-              تایید
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -156,154 +157,87 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
+import { useForm, Field, Form, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+import { validateIranianNationalId } from '~/utils/validateNationalId'
 
 const children = ref([
   { firstName: 'محمد', lastName: 'رضایی', age: 7, gender: 'male', photo: '', birthDate: '', phone: '', nationalId: '', description: '' },
   { firstName: 'نگار', lastName: 'احمدی', age: 5, gender: 'female', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
 ])
 
-const form = ref({
-  firstName: '',
-  lastName: '',
-  age: '',
-  gender: 'male',
-  photo: '',
-  birthDate: '',
-  phone: '',
-  nationalId: '',
-  description: ''
-})
-
-const errors = ref({
-  firstName: '',
-  lastName: '',
-  age: '',
-  photo: '',
-  birthDate: '',
-  phone: '',
-  nationalId: ''
-})
-
 const isEditing = ref(false)
 const editingIndex = ref(null)
 const modalRef = ref(null)
 let bsModal = null
 
+const schema = yup.object({
+  firstName: yup.string().required('نام الزامی است'),
+  lastName: yup.string().required('نام خانوادگی الزامی است'),
+  age: yup.number().typeError('سن باید عدد باشد').min(1,'سن باید بین ۱ تا ۱۲ باشد').max(12,'سن باید بین ۱ تا ۱۲ باشد').required('سن الزامی است'),
+  gender: yup.string().oneOf(['male','female']),
+  photo: yup.mixed().required('بارگذاری عکس الزامی است'),
+  birthDate: yup.string().required('تاریخ تولد الزامی است'),
+  phone: yup.string().matches(/^09\d{9}$/,'شماره تماس معتبر نیست').required('شماره تماس الزامی است'),
+  nationalId: yup.string().required('کد ملی الزامی است').test('is-valid','کد ملی معتبر نیست', value => validateIranianNationalId(value)),
+  description: yup.string().nullable()
+})
+
+const { handleSubmit, resetForm, setValues, values, errors, setFieldValue } = useForm({
+  validationSchema: schema,
+  initialValues: {
+    firstName:'', lastName:'', age:'', gender:'male', photo:'', birthDate:'', phone:'', nationalId:'', description:''
+  }
+})
+
 onMounted(async () => {
   const bootstrap = await import('bootstrap')
-  if (modalRef.value) {
-    bsModal = new bootstrap.Modal(modalRef.value)
-  }
+  if (modalRef.value) bsModal = new bootstrap.Modal(modalRef.value)
 })
 
 const openAddModal = () => {
   isEditing.value = false
-  form.value = { firstName: '', lastName: '', age: '', gender: 'male', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
-  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
+  resetForm()
   openModal()
 }
 
 const editChild = (index) => {
   isEditing.value = true
   editingIndex.value = index
-  form.value = { ...children.value[index] }
-  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
+  setValues({ ...children.value[index] })
   openModal()
 }
 
 const deleteChild = (index) => {
-  children.value.splice(index, 1)
+  children.value.splice(index,1)
 }
 
-const validateForm = () => {
-  let isValid = true
-  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
-
-  if (!form.value.firstName.trim()) {
-    errors.value.firstName = 'نام الزامی است'
-    isValid = false
-  }
-
-  if (!form.value.lastName.trim()) {
-    errors.value.lastName = 'نام خانوادگی الزامی است'
-    isValid = false
-  }
-
-  const age = Number(form.value.age)
-  if (!age || age < 1 || age > 12) {
-    errors.value.age = 'سن باید بین ۱ تا ۱۲ باشد'
-    isValid = false
-  }
-
-  if (!form.value.photo) {
-    errors.value.photo = 'بارگذاری عکس الزامی است'
-    isValid = false
-  }
-
-  if (!form.value.birthDate) {
-    errors.value.birthDate = 'تاریخ تولد الزامی است'
-    isValid = false
-  }
-
-  if (!form.value.phone || !/^09\d{9}$/.test(form.value.phone)) {
-    errors.value.phone = 'شماره تماس معتبر نیست'
-    isValid = false
-  }
-
-  if (!form.value.nationalId || !/^\d{10}$/.test(form.value.nationalId)) {
-    errors.value.nationalId = 'کد ملی باید ۱۰ رقم باشد'
-    isValid = false
-  }
-
-  return isValid
-}
-
-const saveChild = () => {
-  if (!validateForm()) return
-
-  if (isEditing.value) {
-    children.value[editingIndex.value] = { ...form.value }
-  } else {
-    children.value.push({ ...form.value })
+const saveChild = handleSubmit((formData) => {
+  if(isEditing.value){
+    children.value[editingIndex.value] = { ...formData }
+  }else{
+    children.value.push({ ...formData })
   }
   closeModal()
-}
+})
 
 const onPhotoChange = (e) => {
   const file = e.target.files[0]
-  if (file) {
+  if(file){
     const reader = new FileReader()
     reader.onload = () => {
-      form.value.photo = reader.result
-      errors.value.photo = ''
+      setFieldValue({ ...values, photo: reader.result })
     }
     reader.readAsDataURL(file)
   }
 }
 
-const openModal = () => {
-  nextTick(() => {
-    bsModal?.show()
-  })
-}
-
-const closeModal = () => {
-  bsModal?.hide()
-}
+const openModal = () => nextTick(()=>bsModal?.show())
+const closeModal = () => bsModal?.hide()
 </script>
 
 <style scoped>
-.border-dashed {
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-}
-
-.children-tab .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.children-tab .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
+.border-dashed { border: 2px dashed #ccc; border-radius: 10px; }
+.children-tab .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.children-tab .card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
 </style>
