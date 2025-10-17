@@ -44,7 +44,7 @@
       <hr class="border-secondary" />
 
       <div class="text-center small">
-        &copy; 2025 شهربازی داناکو. تمامی حقوق محفوظ است.
+        &copy; 2025 خانه بازی داناکو. تمامی حقوق محفوظ است.
       </div>
     </div>
   </footer>
