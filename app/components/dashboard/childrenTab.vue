@@ -71,7 +71,7 @@
                 @change="onPhotoChange"
                 :class="{ 'is-invalid': errors.photo }"
               />
-              <div class="invalid-feedback text-start">{{ errors.photo }}</div>
+              <div class="invalid-feedback text-end">{{ errors.photo }}</div>
             </div>
 
             <!-- نام -->
@@ -98,10 +98,12 @@
             <!-- جنسیت -->
             <div class="mb-3">
               <label class="form-label">جنسیت</label>
-              <select v-model="form.gender" class="form-select">
+              <select v-model="form.gender" class="form-select" :class="{ 'is-invalid': errors.gender }">
+                <option value="">انتخاب کنید...</option>
                 <option value="male">پسر</option>
                 <option value="female">دختر</option>
               </select>
+              <div class="invalid-feedback">{{ errors.gender }}</div>
             </div>
 
             <!-- تاریخ تولد -->
@@ -120,11 +122,10 @@
               <div class="invalid-feedback">{{ errors.birthDate }}</div>
             </div>
 
-
             <!-- شماره تماس -->
             <div class="mb-3">
               <label class="form-label">شماره تماس</label>
-              <input type="tel" v-model="form.phone" class="form-control" placeholder="مثلاً 09123456789" :class="{ 'is-invalid': errors.phone }" />
+              <input type="tel" v-model="form.phone" class="form-control text-end" placeholder="مثلاً 09123456789" :class="{ 'is-invalid': errors.phone }" />
               <div class="invalid-feedback">{{ errors.phone }}</div>
             </div>
 
@@ -157,20 +158,15 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import { validateNationalId } from '~/utils/validateNationalId' // <-- مسیر را مطابق ساختار پروژه‌ات تنظیم کن
+import { validateNationalId } from '~/utils/validateNationalId'
 
-// نمونه داده اولیه
-const children = ref([
-  { firstName: 'محمد', lastName: 'رضایی', age: 7, gender: 'male', photo: '', birthDate: '', phone: '', nationalId: '', description: '' },
-  { firstName: 'نگار', lastName: 'احمدی', age: 5, gender: 'female', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
-])
+const children = ref([])
 
-// فرم واکنش‌پذیر
 const form = ref({
   firstName: '',
   lastName: '',
   age: '',
-  gender: 'male',
+  gender: '',
   photo: '',
   birthDate: '',
   phone: '',
@@ -178,11 +174,11 @@ const form = ref({
   description: ''
 })
 
-// ارور‌ها
 const errors = ref({
   firstName: '',
   lastName: '',
   age: '',
+  gender: '',
   photo: '',
   birthDate: '',
   phone: '',
@@ -192,7 +188,7 @@ const errors = ref({
 const isEditing = ref(false)
 const editingIndex = ref(null)
 const modalRef = ref(null)
-const fileInput = ref(null) // برای ریست input:file
+const fileInput = ref(null)
 let bsModal = null
 
 onMounted(async () => {
@@ -202,21 +198,17 @@ onMounted(async () => {
   }
 })
 
-// باز کردن مودال افزودن (فرم ریست می‌شود)
 const openAddModal = () => {
   isEditing.value = false
   resetForm()
   openModal()
 }
 
-// ویرایش
 const editChild = (index) => {
   isEditing.value = true
   editingIndex.value = index
-  // clone تا رفرنس نشه
   form.value = { ...children.value[index] }
-  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
-  // اگر عکس هست، input file باید خالی بمونه (نمایش عکس از base64 یا url)
+  errors.value = { firstName: '', lastName: '', age: '', gender: '', photo: '', birthDate: '', phone: '', nationalId: '' }
   nextTick(() => {
     if (fileInput.value) fileInput.value.value = null
   })
@@ -227,24 +219,33 @@ const deleteChild = (index) => {
   children.value.splice(index, 1)
 }
 
-// اعتبارسنجی فرم با استفاده از validateNationalId
 const validateForm = () => {
   let isValid = true
-  errors.value = { firstName: '', lastName: '', age: '', photo: '', birthDate: '', phone: '', nationalId: '' }
+  errors.value = { firstName: '', lastName: '', age: '', gender: '', photo: '', birthDate: '', phone: '', nationalId: '' }
+if (!form.value.firstName.trim()) {
+  errors.value.firstName = 'نام الزامی است'
+  isValid = false
+} else if (form.value.firstName.trim().length < 2) {
+  errors.value.firstName = 'نام باید حداقل ۲ کاراکتر باشد'
+  isValid = false
+}
 
-  if (!form.value.firstName || !form.value.firstName.toString().trim()) {
-    errors.value.firstName = 'نام الزامی است'
-    isValid = false
-  }
-
-  if (!form.value.lastName || !form.value.lastName.toString().trim()) {
-    errors.value.lastName = 'نام خانوادگی الزامی است'
-    isValid = false
-  }
+if (!form.value.lastName.trim()) {
+  errors.value.lastName = 'نام خانوادگی الزامی است'
+  isValid = false
+} else if (form.value.lastName.trim().length < 2) {
+  errors.value.lastName = 'نام خانوادگی باید حداقل ۲ کاراکتر باشد'
+  isValid = false
+}
 
   const ageNum = Number(form.value.age)
   if (!ageNum || ageNum < 1 || ageNum > 12) {
     errors.value.age = 'سن باید بین ۱ تا ۱۲ باشد'
+    isValid = false
+  }
+
+  if (!form.value.gender) {
+    errors.value.gender = 'لطفاً جنسیت را انتخاب کنید'
     isValid = false
   }
 
@@ -258,7 +259,7 @@ const validateForm = () => {
     isValid = false
   }
 
-  if (!form.value.phone || !/^09\d{9}$/.test(String(form.value.phone))) {
+  if (!/^09\d{9}$/.test(String(form.value.phone))) {
     errors.value.phone = 'شماره تماس معتبر نیست'
     isValid = false
   }
@@ -276,19 +277,15 @@ const validateForm = () => {
 
 const saveChild = () => {
   if (!validateForm()) return
-
   if (isEditing.value && editingIndex.value !== null) {
     children.value[editingIndex.value] = { ...form.value }
   } else {
     children.value.push({ ...form.value })
   }
-
-  // بعد از افزودن/ویرایش: فرم و ارورها ریست شوند و input فایل پاک شود
   resetForm()
   closeModal()
 }
 
-// هندل آپلود عکس و تبدیل به base64 برای نمایش
 const onPhotoChange = (e) => {
   const file = e.target.files && e.target.files[0]
   if (file) {
@@ -301,44 +298,14 @@ const onPhotoChange = (e) => {
   }
 }
 
-const openModal = () => {
-  nextTick(() => {
-    bsModal?.show()
-  })
-}
+const openModal = () => nextTick(() => bsModal?.show())
+const closeModal = () => bsModal?.hide()
 
-const closeModal = () => {
-  bsModal?.hide()
-}
+const onCancel = () => resetForm()
 
-// وقتی کاربر انصراف زد (یا modal با دکمه انصراف بسته شد) فرم ریست شود
-const onCancel = () => {
-  resetForm()
-  // modal بسته می‌شود بخاطر data-bs-dismiss
-}
-
-// تابع کمکی برای ریست کردن فرم و ارورها و پاک کردن input فایل
 const resetForm = () => {
-  form.value = {
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender: 'male',
-    photo: '',
-    birthDate: '',
-    phone: '',
-    nationalId: '',
-    description: ''
-  }
-  errors.value = {
-    firstName: '',
-    lastName: '',
-    age: '',
-    photo: '',
-    birthDate: '',
-    phone: '',
-    nationalId: ''
-  }
+  form.value = { firstName: '', lastName: '', age: '', gender: '', photo: '', birthDate: '', phone: '', nationalId: '', description: '' }
+  errors.value = { firstName: '', lastName: '', age: '', gender: '', photo: '', birthDate: '', phone: '', nationalId: '' }
   editingIndex.value = null
   isEditing.value = false
   nextTick(() => {
@@ -352,11 +319,9 @@ const resetForm = () => {
   border: 2px dashed #ccc;
   border-radius: 10px;
 }
-
 .children-tab .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .children-tab .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);

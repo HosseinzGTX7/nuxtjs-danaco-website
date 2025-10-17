@@ -23,7 +23,7 @@
           <svg
             width="28"
             height="28"
-            viewBox="0 0 24 24"
+            viewBox="1 0 24 24"
             :class="{ open: isMenuOpen }"
           >
             <path class="line top" d="M5 7h14"></path>
@@ -93,6 +93,7 @@ const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value)
 }
 .nav-link:hover {
   color: #000 !important;
+  transition: 0.65s;
 }
 
 /* آیکون همبرگر */
