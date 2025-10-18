@@ -5,7 +5,8 @@ export default defineNuxtConfig({
    css: [
     'bootstrap/dist/css/bootstrap.min.css',
     'bootstrap-icons/font/bootstrap-icons.css',
-    '@/assets/css/fonts.css'
+    '@/assets/css/fonts.css',
+    '~/assets/css/main.css'
   ],
   plugins: [{ src: '~/plugins/bootstrap.client.ts', mode: 'client' },
   ],

@@ -5,8 +5,18 @@
         <img src="/images/IMG_20251005_163552_989.png" alt="لوگو" width="40" height="40" class="me-2" />
         <span class="fw-bold fs-3 text-primary">داناکو</span>
       </div>
-
+      
+       <!-- دکمه تغییر تم + داشبورد -->
+      <div class="d-flex align-items-center gap-2">
+        <button
+          @click="$emit('toggle-theme')"
+          class="btn btn-outline-secondary rounded-pill d-flex align-items-center gap-1"
+          title="تغییر حالت روشن/تاریک"
+        >
+          <i :class="theme === 'dark' ? 'bi bi-moon-fill text-warning' : 'bi bi-sun-fill text-dark'"></i>
+        </button>
       <NuxtLink to="/dashboard" class="btn btn-primary fw-bold rounded-pill">داشبورد</NuxtLink>
+      </div>
     </div>
 
     <nav class="navbar navbar-dark main-nav px-4">
@@ -72,6 +82,12 @@
 
 <script setup>
 import { ref } from 'vue'
+
+//light and dark mode
+defineProps({
+  theme: String
+})
+defineEmits(['toggle-theme'])
 
 const isMenuOpen = ref(false)
 const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value)

@@ -1,7 +1,7 @@
 <template>
   <section class="container my-5">
     <!-- بخش خوش آمدگویی -->
-    <div class="row align-items-center mb-5 bg-light p-4 rounded shadow-sm">
+    <div class="row align-items-center bg-secondary bg-opacity-25 mb-5 p-4 rounded shadow">
       <div class="col-md-6">
         <h1 class="fw-bold welcome-title">به خانه بازی داناکو خوش آمدید!</h1>
         <p class="text-muted mt-3">

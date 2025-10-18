@@ -1,0 +1,14 @@
+/* main.css */
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #121212;
+  --bs-body-color: #f8f9fa;
+}
+
+[data-bs-theme="light"] {
+  --bs-body-bg: #fff;
+  --bs-body-color: #212529;
+}
