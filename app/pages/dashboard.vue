@@ -12,9 +12,13 @@
           </div>
 
           <!-- تب‌ها -->
-          <ul class="nav nav-pills justify-content-center mb-4 flex-wrap">
+          <ul class="nav nav-pills dashboard-tabs mb-4 ps-4 flex-wrap justify-content-center">
             <li class="nav-item" v-for="tab in tabs" :key="tab.key">
-              <button class="nav-link" :class="{active: activeTab===tab.key}" @click="activeTab=tab.key">
+              <button
+                class="nav-link w-100 text-center shadow-sm rounded-pill"
+                :class="{ active: activeTab === tab.key }"
+                @click="activeTab = tab.key"
+              >
                 {{ tab.label }}
               </button>
             </li>
@@ -22,15 +26,14 @@
 
           <!-- محتوای تب‌ها -->
           <div>
-
-            <ProfileTab v-if="activeTab==='profile'" />
-            <WalletTab v-if="activeTab==='wallet'" :walletBalance="walletBalance" :transactions="transactions" @open-modal="openModal"/>
-            <HistoryTab v-if="activeTab==='history'"/>
-            <ChildrenTab v-if="activeTab === 'children'"/>
-            <RewardsTab v-if="activeTab === 'rewards'"/>
-            <MessagesTab v-if="activeTab === 'messages'"/>
-
+            <ProfileTab v-show="activeTab === 'profile'" />
+            <WalletTab v-show="activeTab === 'wallet'" :walletBalance="walletBalance" :transactions="transactions" />
+            <HistoryTab v-show="activeTab === 'history'" />
+            <ChildrenTab v-show="activeTab === 'children'" />
+            <RewardsTab v-show="activeTab === 'rewards'" />
+            <MessagesTab v-show="activeTab === 'messages'" />
           </div>
+
         </div>
       </div>
     </div>
@@ -61,16 +64,48 @@ const tabs = [
 
 const activeTab = ref('profile')
 
-// نمونه داده کیف پول
 const walletBalance = ref(245000)
 const transactions = ref([
   { amount: 100000, type: 'شارژ حساب', date: '1403/07/15' },
   { amount: 50000, type: 'رزرو کارگاه آموزشی', date: '1403/07/17' },
   { amount: 200000, type: 'هزینه جشن تولد', date: '1403/08/01' }
 ])
-
-// باز کردن مودال از WalletTab
-function openModal() {
-  // در این حالت، WalletTab خودش مودال را مدیریت می‌کند، نیازی به کد اضافه نیست
-}
 </script>
+
+<style scoped>
+.dashboard-tabs {
+  gap: 0.5rem;
+}
+
+.dashboard-tabs .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+  margin: 0.25rem;
+}
+
+.dashboard-tabs .nav-link {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.7rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .dashboard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dashboard-tabs .nav-item {
+    flex: 1 1 45%; /* دو دکمه در هر ردیف */
+    max-width: 45%;
+  }
+
+  .dashboard-tabs .nav-link {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+</style>

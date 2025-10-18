@@ -6,10 +6,10 @@
     </div>
 
     <!-- دسته‌بندی‌ها -->
-    <ul class="nav nav-pills justify-content-center mb-5 flex-wrap">
-      <li class="nav-item" v-for="cat in categories" :key="cat">
+    <ul class="nav nav-pills justify-content-center mb-5 ps-5 flex-wrap">
+      <li class="nav-item m-1" v-for="cat in categories" :key="cat">
         <button
-          class="nav-link"
+          class="nav-link w-100 text-center shadow-sm rounded-pill"
           :class="{ active: selectedCategory === cat }"
           @click="selectedCategory = cat"
         >

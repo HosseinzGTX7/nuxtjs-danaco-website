@@ -52,12 +52,12 @@
         <transition name="menu-slide">
           <div v-show="isMenuOpen" class="mobile-menu d-lg-none w-100">
             <ul class="navbar-nav py-2 px-3 mb-0">
-              <li class="nav-item"><NuxtLink to="/" class="nav-link" exact-active-class="active">صفحه اصلی</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/services" class="nav-link" exact-active-class="active">خدمات</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/gallery" class="nav-link" exact-active-class="active">گالری</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/blog" class="nav-link" exact-active-class="active">وبلاگ</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/contact" class="nav-link" exact-active-class="active">تماس</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/about" class="nav-link" exact-active-class="active">درباره ما</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/" class="nav-link" exact-active-class="active" @click="closeMenu">صفحه اصلی</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/services" class="nav-link" exact-active-class="active" @click="closeMenu">خدمات</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/gallery" class="nav-link" exact-active-class="active" @click="closeMenu">گالری</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/blog" class="nav-link" exact-active-class="active" @click="closeMenu">وبلاگ</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/contact" class="nav-link" exact-active-class="active" @click="closeMenu">تماس</NuxtLink></li>
+              <li class="nav-item"><NuxtLink to="/about" class="nav-link" exact-active-class="active" @click="closeMenu">درباره ما</NuxtLink></li>
             </ul>
 
             <div class="px-3 pb-3">
@@ -72,8 +72,14 @@
 
 <script setup>
 import { ref } from 'vue'
+
 const isMenuOpen = ref(false)
 const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value)
+
+// وقتی لینک موبایل زده شد منو بسته شود
+const closeMenu = () => {
+  isMenuOpen.value = false
+}
 </script>
 
 <style scoped>
@@ -125,7 +131,7 @@ svg.open .bottom {
 /* انیمیشن منوی موبایل */
 .menu-slide-enter-active,
 .menu-slide-leave-active {
-  transition: max-height 0.75s ease, opacity 0.55s ease, padding 0.55s ease;
+  transition: max-height 0.65s ease, opacity 0.45s ease, padding 0.45s ease;
 }
 .menu-slide-enter-from,
 .menu-slide-leave-to {
