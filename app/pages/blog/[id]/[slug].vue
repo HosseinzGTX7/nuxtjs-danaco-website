@@ -24,11 +24,11 @@
            <i class="bi bi-chat-heart-fill ms-2 fs-3"></i>
            نظرات کاربران
          </h4>
-        <div class="border rounded p-3 mb-3 bg-light">
+        <div class="border rounded p-3 mb-3 bg-secondary bg-opacity-25">
           <strong>مینا:</strong>
           <p class="mb-0">مقاله‌ی مفیدی بود، ممنون از توضیحاتتون 🌸</p>
         </div>
-        <div class="border rounded p-3 mb-3 bg-light">
+        <div class="border rounded p-3 mb-3 bg-secondary bg-opacity-25">
           <strong>احمد:</strong>
           <p class="mb-0">خیلی آموزنده بود، مخصوصاً بخش مربوط به گوش دادن فعال.</p>
         </div>

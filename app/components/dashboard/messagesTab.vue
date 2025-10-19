@@ -22,7 +22,7 @@
           <div class="message-card p-3 shadow-sm">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <h6 class="fw-bold mb-0 text-dark">{{ msg.title }}</h6>
-              <small class="text-muted">{{ formatDate(msg.date) }}</small>
+              <small class="text-secondary">{{ formatDate(msg.date) }}</small>
             </div>
             <p class="mb-0 text-secondary">{{ msg.content }}</p>
           </div>

@@ -44,7 +44,7 @@
           <div class="coupon-card p-3 h-100 d-flex flex-column justify-content-between text-center">
             <div>
               <h6 class="fw-bold text-dark">{{ coupon.title }}</h6>
-              <p class="text-muted mb-2">{{ coupon.description }}</p>
+              <p class="text-secondary mb-2">{{ coupon.description }}</p>
             </div>
             <div>
               <span class="badge bg-dark text-light">کد: {{ coupon.code }}</span>

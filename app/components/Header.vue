@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="sticky-top">
     <div class="d-flex justify-content-between align-items-center px-4 py-2 top-bar">
       <div class="d-flex align-items-center">
         <img src="/images/IMG_20251005_163552_989.png" alt="لوگو" width="40" height="40" class="me-2" />
