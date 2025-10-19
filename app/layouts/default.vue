@@ -4,11 +4,13 @@
     <NuxtPage />
     <Footer />
   </div>
+  <ScrollToTop />
 </template>
 
 <script setup>
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+import ScrollToTop from '~/components/ScrollToTop.vue'
 import { useCookie, watch, computed, onMounted } from '#imports'
 
 useHead({
