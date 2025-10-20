@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-sm p-4 shadow-lg" style="max-width: 400px; width: 100%;">
       <h2 class="text-center mb-4">ثبت‌نام کاربر</h2>
       
       <Form :validation-schema="schema" :initial-values="{ terms: false }" @submit="handleRegister" v-slot="{ submitCount }">

@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-sm p-4 shadow-lg" style="max-width: 400px; width: 100%;">
       <h2 class="text-center mb-4"><i class="bi bi-box-arrow-in-right ms-1"></i>
       وارد شوید!
       </h2>

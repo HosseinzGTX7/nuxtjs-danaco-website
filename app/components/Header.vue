@@ -1,77 +1,136 @@
 <template>
   <header class="sticky-top">
-    <div class="d-flex justify-content-between align-items-center px-4 py-2 top-bar">
-      <div class="d-flex align-items-center">
-        <img src="/images/IMG_20251005_163552_989.png" alt="لوگو" width="40" height="40" class="me-2" />
-        <span class="fw-bold fs-3 text-primary">داناکو</span>
-      </div>
-      
-       <!-- دکمه تغییر تم + داشبورد -->
-      <div class="d-flex align-items-center gap-2">
-        <button
-          @click="$emit('toggle-theme')"
-          class="btn btn-outline-secondary rounded-pill d-flex align-items-center gap-1"
-          title="تغییر حالت روشن/تاریک"
-        >
-          <i :class="theme === 'dark' ? 'bi bi-moon-fill text-warning' : 'bi bi-sun-fill text-dark'"></i>
-        </button>
-      <NuxtLink to="/dashboard" class="btn btn-primary fw-bold rounded-pill">داشبورد</NuxtLink>
+    <!-- نوار بالایی -->
+    <div class="top-bar">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center px-4 py-2">
+          <div class="d-flex align-items-center">
+            <div class="logo-container">
+              <img src="/images/IMG_20251005_163552_989.png" alt="لوگو داناکو" width="40" height="40" class="logo-img" />
+              <span class="fw-bold fs-3 text-primary me-2 logo-text">داناکو</span>
+            </div>
+          </div>
+          
+          <!-- دکمه تغییر تم + داشبورد -->
+          <div class="d-flex align-items-center gap-3">
+            <button
+              @click="$emit('toggle-theme')"
+              class="btn theme-toggle rounded-pill d-flex align-items-center justify-content-center"
+              :title="theme === 'dark' ? 'فعال کردن حالت روشن' : 'فعال کردن حالت تاریک'"
+            >
+              <i :class="theme === 'dark' ? 'bi bi-moon-fill' : 'bi bi-sun-fill'"></i>
+            </button>
+            <NuxtLink to="/dashboard" class="btn btn-dashboard fw-bold rounded-pill">
+              <i class="bi bi-person-circle ms-1"></i> داشبورد
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </div>
 
-    <nav class="navbar navbar-dark main-nav px-4">
-      <div class="container-fluid d-flex align-items-center justify-content-between">
-        <a class="navbar-brand d-lg-none" href="#">منو</a>
-
-        <!-- دکمه همبرگری فقط در موبایل نمایش داده می‌شود -->
-        <button
-          class="navbar-toggler border-0 d-lg-none"
-          type="button"
-          @click="toggleMenu"
-          aria-label="Toggle navigation"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="1 0 24 24"
-            :class="{ open: isMenuOpen }"
+    <!-- نوار ناوبری اصلی -->
+    <nav class="navbar main-nav">
+      <div class="container-fluid position-relative">
+        <div class="d-flex align-items-center justify-content-between w-100">
+          <!-- دکمه همبرگری فقط در موبایل -->
+          <button
+            class="navbar-toggler d-lg-none"
+            type="button"
+            @click="toggleMenu"
+            aria-label="Toggle navigation"
           >
-            <path class="line top" d="M5 7h14"></path>
-            <path class="line middle" d="M5 12h14"></path>
-            <path class="line bottom" d="M5 17h14"></path>
-          </svg>
-        </button>
+            <div class="hamburger" :class="{ 'active': isMenuOpen }">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
 
-        <!-- لینک‌ها برای دسکتاپ (نمایش از lg به بالا) -->
-        <div class="desktop-menu d-none d-lg-flex align-items-center w-100">
-          <ul class="navbar-nav ms-auto mb-0 d-flex flex-row align-items-center gap-3">
-            <li class="nav-item"><NuxtLink to="/" class="nav-link" exact-active-class="active">صفحه اصلی</NuxtLink></li>
-            <li class="nav-item"><NuxtLink to="/services" class="nav-link" exact-active-class="active">خدمات</NuxtLink></li>
-            <li class="nav-item"><NuxtLink to="/gallery" class="nav-link" exact-active-class="active">گالری</NuxtLink></li>
-            <li class="nav-item"><NuxtLink to="/blog" class="nav-link" exact-active-class="active">وبلاگ</NuxtLink></li>
-            <li class="nav-item"><NuxtLink to="/contact" class="nav-link" exact-active-class="active">تماس</NuxtLink></li>
-            <li class="nav-item"><NuxtLink to="/about" class="nav-link" exact-active-class="active">درباره ما</NuxtLink></li>
-          </ul>
-
-          <span class="text-dark fw-bold p-1 ms-3">
-            0912-123-4567 <i class="bi bi-telephone-inbound"></i>
-          </span>
-        </div>
-
-        <!-- لینک‌ها برای موبایل -->
-        <transition name="menu-slide">
-          <div v-show="isMenuOpen" class="mobile-menu d-lg-none w-100">
-            <ul class="navbar-nav py-2 px-3 mb-0">
-              <li class="nav-item"><NuxtLink to="/" class="nav-link" exact-active-class="active" @click="closeMenu">صفحه اصلی</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/services" class="nav-link" exact-active-class="active" @click="closeMenu">خدمات</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/gallery" class="nav-link" exact-active-class="active" @click="closeMenu">گالری</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/blog" class="nav-link" exact-active-class="active" @click="closeMenu">وبلاگ</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/contact" class="nav-link" exact-active-class="active" @click="closeMenu">تماس</NuxtLink></li>
-              <li class="nav-item"><NuxtLink to="/about" class="nav-link" exact-active-class="active" @click="closeMenu">درباره ما</NuxtLink></li>
+          <!-- لینک‌ها برای دسکتاپ -->
+          <div class="desktop-menu d-none d-lg-flex align-items-center w-100">
+            <ul class="navbar-nav ms-auto mb-0 d-flex flex-row align-items-center gap-1">
+              <li class="nav-item">
+                <NuxtLink to="/" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-house-door ms-1"></i> صفحه اصلی
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/services" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-briefcase ms-1"></i> خدمات
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/gallery" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-images ms-1"></i> گالری
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/blog" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-journal-text ms-1"></i> وبلاگ
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/contact" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-telephone ms-1"></i> تماس
+                </NuxtLink>
+              </li>
+              <li class="nav-item">
+                <NuxtLink to="/about" class="nav-link" exact-active-class="active">
+                  <i class="bi bi-info-circle ms-1"></i> درباره ما
+                </NuxtLink>
+              </li>
             </ul>
 
-            <div class="px-3 pb-3">
-              <span class="text-dark fw-bold">0912-123-4567 <i class="bi bi-telephone-inbound"></i></span>
+            <div class="contact-info d-flex align-items-center ms-4">
+              <span class="fw-bold">0912-123-4567</span>
+              <i class="bi bi-telephone-inbound me-2"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- منوی موبایل -->
+        <transition name="menu-slide">
+          <div v-show="isMenuOpen" class="mobile-menu d-lg-none mt-2">
+            <div class="mobile-menu-content">
+              <ul class="navbar-nav py-3 px-3 mb-0">
+                <li class="nav-item">
+                  <NuxtLink to="/" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-house-door ms-2"></i> صفحه اصلی
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/services" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-briefcase ms-2"></i> خدمات
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/gallery" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-images ms-2"></i> گالری
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/blog" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-journal-text ms-2"></i> وبلاگ
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/contact" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-telephone ms-2"></i> تماس
+                  </NuxtLink>
+                </li>
+                <li class="nav-item">
+                  <NuxtLink to="/about" class="nav-link" exact-active-class="active" @click="closeMenu">
+                    <i class="bi bi-info-circle ms-2"></i> درباره ما
+                  </NuxtLink>
+                </li>
+              </ul>
+
+              <div class="mobile-contact px-3 py-3">
+                <div class="d-flex align-items-center justify-content-center">
+                  <span class="fw-bold">0912-123-4567</span>
+                  <i class="bi bi-telephone-inbound me-2"></i>
+                </div>
+              </div>
             </div>
           </div>
         </transition>
@@ -99,78 +158,282 @@ const closeMenu = () => {
 </script>
 
 <style scoped>
+/* استایل‌های سفارشی برای هدر مدرن */
+
+/* نوار بالایی */
 .top-bar {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: translateY(-2px);
+}
+
+.logo-img {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.logo-img:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.logo-text {
+  background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* دکمه تغییر تم */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #6c757d;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.theme-toggle:hover {
+  background: white;
+  color: #495057;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* دکمه داشبورد */
+.btn-dashboard {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  border: none;
+  padding: 0.5rem 1.25rem;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(13, 110, 253, 0.25);
+}
+
+.btn-dashboard:hover {
+  background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(13, 110, 253, 0.3);
+  color: white;
+}
+
+/* نوار ناوبری اصلی */
 .main-nav {
-  background-color: #a3a3a3;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
 }
 
-/* لینک‌ها */
-.nav-link {
-  color: #e4e3e3 !important;
-  transition: 0.15s;
-}
-.nav-link:hover {
-  color: #000 !important;
-  transition: 0.65s;
-}
-
-/* آیکون همبرگر */
-.navbar-toggler svg {
+/* دکمه همبرگر مدرن */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  justify-content: space-between;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
-/* خطوط همبرگری */
-.line {
-  fill: none;
-  stroke: white;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  transform-origin: 12px 12px;
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
 }
 
-svg.open .top {
-  transform: rotate(45deg) translate(2px, 3px);
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
 }
-svg.open .middle {
+
+.hamburger.active span:nth-child(2) {
   opacity: 0;
 }
-svg.open .bottom {
-  transform: rotate(-45deg) translate(2px, -3px);
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* انیمیشن منوی موبایل */
+/* لینک‌های ناوبری دسکتاپ */
+.desktop-menu .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 500;
+}
+
+.desktop-menu .nav-link:hover {
+  color: white !important;
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.desktop-menu .nav-link.active {
+  color: white !important;
+  background: rgba(255,255,255,0.2);
+  font-weight: 600;
+}
+
+.desktop-menu .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* اطلاعات تماس */
+.contact-info {
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.contact-info:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* منوی موبایل - اصلاح شده */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+
+.mobile-menu-content {
+  width: 100%;
+}
+
+.mobile-menu .nav-link {
+  color: rgba(255,255,255,0.9) !important;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.mobile-menu .nav-link:hover {
+  color: white !important;
+  background: rgba(255,255,255,0.1);
+  padding-right: 1.5rem;
+}
+
+.mobile-menu .nav-link.active {
+  color: white !important;
+  background: rgba(255,255,255,0.15);
+  font-weight: 600;
+}
+
+.mobile-contact {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  background: rgba(0,0,0,0.1);
+}
+
+/* انیمیشن منوی موبایل - اصلاح شده */
 .menu-slide-enter-active,
 .menu-slide-leave-active {
-  transition: max-height 0.65s ease, opacity 0.45s ease, padding 0.45s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.menu-slide-enter-from,
+
+.menu-slide-enter-from {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.menu-slide-enter-to {
+  max-height: 400px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-slide-leave-from {
+  max-height: 400px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .menu-slide-leave-to {
   max-height: 0;
   opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  overflow: hidden;
-}
-.menu-slide-enter-to,
-.menu-slide-leave-from {
-  max-height: 1000px;
-  opacity: 1;
+  transform: translateY(-10px);
 }
 
-/* نمایش داخلی دسکتاپ: آیتم‌ها کنار هم */
-.desktop-menu .navbar-nav .nav-item .nav-link {
-  padding: 0.5rem 0.75rem;
+/* حالت تاریک */
+:global(.dark) .top-bar {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* موبایل: آرایش عمودی */
-.mobile-menu .nav-link {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+:global(.dark) .theme-toggle {
+  background: rgba(255,255,255,0.1);
+  color: #adb5bd;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+:global(.dark) .theme-toggle:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* رسپانسیو */
+@media (max-width: 991.98px) {
+  .desktop-menu .navbar-nav {
+    gap: 0.5rem;
+  }
+  
+  .desktop-menu .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .top-bar .container-fluid > div {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem !important;
+  }
+  
+  .mobile-menu {
+    border-radius: 0 0 12px 12px;
+  }
 }
 </style>
