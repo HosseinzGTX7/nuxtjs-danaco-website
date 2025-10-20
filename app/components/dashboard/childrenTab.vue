@@ -60,7 +60,7 @@
           <div class="modal-body">
             <div class="mb-3 text-center">
               <img
-                :src="form.photo || '/images/computer-icons-user-profile.png'"
+                :src="form.photo || '/images/icons8-profile.apng'"
                 class="rounded-circle mb-4"
                 style="width:100px;height:100px;object-fit:cover;"
               />
