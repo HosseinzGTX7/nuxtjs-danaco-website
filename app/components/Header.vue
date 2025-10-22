@@ -3,7 +3,7 @@
     <!-- نوار بالایی -->
     <div class="top-bar">
       <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center px-4 py-2">
+        <div class="d-flex justify-content-between align-items-center px-2 py-2">
           <div class="d-flex align-items-center">
             <div class="logo-container">
               <img src="/images/IMG_20251005_163552_989.png" alt="لوگو داناکو" width="40" height="40" class="logo-img" />
@@ -158,8 +158,6 @@ const closeMenu = () => {
 </script>
 
 <style scoped>
-/* استایل‌های سفارشی برای هدر مدرن */
-
 /* نوار بالایی */
 .top-bar {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -215,7 +213,7 @@ const closeMenu = () => {
 
 /* دکمه داشبورد */
 .btn-dashboard {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #9f15fc 0%, #0a58ca 100%);
   border: none;
   padding: 0.5rem 1.25rem;
   color: white;
@@ -224,7 +222,7 @@ const closeMenu = () => {
 }
 
 .btn-dashboard:hover {
-  background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+  background: linear-gradient(135deg, #7b13c1 0%, #084298 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(13, 110, 253, 0.3);
   color: white;
@@ -436,4 +434,5 @@ const closeMenu = () => {
     border-radius: 0 0 12px 12px;
   }
 }
+
 </style>

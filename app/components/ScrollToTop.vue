@@ -64,12 +64,19 @@ onMounted(() => {
   updateScroll()
   window.addEventListener('scroll', updateScroll, { passive: true })
   window.addEventListener('resize', updateScroll)
+
+  // وقتی مودال باز یا بسته می‌شود
+  document.addEventListener('show.bs.modal', () => (visible.value = false))
+  document.addEventListener('hidden.bs.modal', updateScroll)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateScroll)
   window.removeEventListener('resize', updateScroll)
+  document.removeEventListener('show.bs.modal', () => (visible.value = false))
+  document.removeEventListener('hidden.bs.modal', updateScroll)
 })
+
 </script>
 
 <style scoped>

@@ -91,7 +91,40 @@ const transactions = ref([
   white-space: nowrap;
 }
 
-@media (max-width: 768px) {
+/* دسکتاپ - همه در یک ردیف */
+@media (min-width: 769px) {
+  .dashboard-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .dashboard-tabs .nav-item {
+    flex: 1;
+  }
+}
+
+/*  موبایل‌های متوسط - سه ستون */
+@media (max-width: 768px) and (min-width: 481px) {
+  .dashboard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dashboard-tabs .nav-item {
+    flex: 1 1 30%; /* سه دکمه در هر ردیف */
+    max-width: 30%;
+    margin: 0.2rem;
+  }
+
+  .dashboard-tabs .nav-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.4rem;
+  }
+}
+
+/* موبایل‌های کوچک - دو ستون */
+@media (max-width: 480px) {
   .dashboard-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -101,11 +134,12 @@ const transactions = ref([
   .dashboard-tabs .nav-item {
     flex: 1 1 45%; /* دو دکمه در هر ردیف */
     max-width: 45%;
+    margin: 0.15rem;
   }
 
   .dashboard-tabs .nav-link {
-    font-size: 0.85rem;
-    padding: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.3rem;
   }
 }
 </style>

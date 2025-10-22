@@ -20,7 +20,7 @@
       <div class="col-md-6 text-center">
         <img
           src="/images/IMG_20251005_163552_376.png"
-          class="img-fluid rounded m-4"
+          class="img-fluid rounded m-2"
           alt="شهربازی"
         />
       </div>
@@ -29,10 +29,24 @@
     <!-- اسلایدر تصاویر -->
     <div
       id="homeCarousel"
-      class="carousel slide mb-5"
+      class="carousel slide mb-5 shadow-lg rounded-3 overflow-hidden"
       data-bs-ride="carousel"
-      data-bs-interval="2000"
+      data-bs-interval="3000"
     >
+      <!-- اضافه کردن اندیکاتورها -->
+      <div class="carousel-indicators">
+        <button
+          v-for="(slide, index) in sliderImages"
+          :key="index"
+          type="button"
+          data-bs-target="#homeCarousel"
+          :data-bs-slide-to="index"
+          :class="{ active: index === 0 }"
+          class="rounded-circle"
+          style="width: 12px; height: 12px;"
+        ></button>
+      </div>
+  
       <div class="carousel-inner">
         <div
           class="carousel-item"
@@ -42,31 +56,38 @@
         >
           <img
             :src="slide"
-            class="d-block w-100 rounded"
+            class="d-block w-100"
             alt="Slide Image"
-            style="height: 400px; object-fit: contain"
+            style="height: 500px; object-fit: cover;"
           />
+          <!-- اضافه کردن overlay و caption -->
+          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+            <h5>خانه بازی داناکو</h5>
+            <p>محیطی شاد و ایمن برای کودکان</p>
+          </div>
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+  
+  <!-- بهبود دکمه‌های کنترل -->
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#homeCarousel"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#homeCarousel"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon bg-primary rounded-circle p-3" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
     <!-- نمایش سه خدمت -->
     <h2 class="fw-bold mb-4">خدمات ویژه</h2>
@@ -215,25 +236,72 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* بهبود استایل اسلایدر */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #404040;
-  width: 52px;
-  height: 52px;
+  background-color: var(--bs-primary);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-size: 60%;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: var(--bs-primary);
+  transform: scale(1.1);
+}
+
+.carousel-indicators button {
+  background-color: #dee2e6;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background-color: var(--bs-primary);
+  transform: scale(1.2);
+}
+
+/* انیمیشن برای اسلایدها */
+.carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+/* سایه و گردی بیشتر برای کل اسلایدر */
+#homeCarousel {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-title {
-  font-size: 2rem; /* اندازه پیش‌فرض برای دسکتاپ */
+  font-size: 2rem;
 }
 
-/* حالت موبایل */
 @media (max-width: 576px) {
   .welcome-title {
-    font-size: 1.2rem; /* فونت کوچکتر برای موبایل */
+    font-size: 1.2rem;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+  width: 13%;
+  }
+  /* ارتفاع کمتر برای موبایل با حفظ نسبت عکس */
+  .carousel-item img {
+    height: 250px !important;
+    object-fit: cover !important;
+  }
+  
+  /* کوچک‌تر کردن اندیکاتورها در موبایل */
+  .carousel-indicators button {
+    width: 8px !important;
+    height: 8px !important;
   }
 }
-
 </style>
 
