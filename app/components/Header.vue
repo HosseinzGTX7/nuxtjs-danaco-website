@@ -34,7 +34,7 @@
         <div class="d-flex align-items-center justify-content-between w-100">
           <!-- دکمه همبرگری فقط در موبایل -->
           <button
-            class="navbar-toggler d-lg-none"
+            class="navbar-toggler d-lg-none pt-2 pb-2"
             type="button"
             @click="toggleMenu"
             aria-label="Toggle navigation"

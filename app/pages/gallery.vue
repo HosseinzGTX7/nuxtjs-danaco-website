@@ -6,10 +6,10 @@
     </div>
 
     <!-- دسته‌بندی‌ها -->
-    <ul class="nav nav-pills justify-content-center mb-5 ps-5 flex-wrap">
-      <li class="nav-item m-1" v-for="cat in categories" :key="cat">
+    <ul class="nav nav-pills justify-content-center mb-4 flex-wrap gap-2 pe-1">
+      <li class="nav-item" v-for="cat in categories" :key="cat">
         <button
-          class="nav-link w-100 text-center shadow-sm rounded-pill"
+          class="nav-link text-center shadow-sm rounded-pill px-3 py-2 text-nowrap"
           :class="{ active: selectedCategory === cat }"
           @click="selectedCategory = cat"
         >
@@ -17,6 +17,7 @@
         </button>
       </li>
     </ul>
+
 
     <!-- لیست گالری -->
     <transition-group name="fade" tag="div" class="row g-4">

@@ -12,3 +12,9 @@ body {
   --bs-body-bg: #fff;
   --bs-body-color: #212529;
 }
+
+/* حالت تاریک برای دکمه ها */
+[data-bs-theme="dark"] button,
+[data-bs-theme="dark"] .btn {
+  border: 1px solid #8c8b8b; /* سفید باریک */
+}
