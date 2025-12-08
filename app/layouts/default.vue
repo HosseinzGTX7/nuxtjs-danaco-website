@@ -36,6 +36,7 @@ useHead({
   ]
 })
 
+//dark and light mode
 const themeCookie = useCookie('theme', { default: () => 'light' })
 
 const themeValue = computed(() => themeCookie.value)

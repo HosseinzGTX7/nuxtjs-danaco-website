@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-
+  
   app: {
     head: {
       title: 'danako',
@@ -12,7 +12,8 @@ export default defineNuxtConfig({
         { charset: 'utf-8' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/png', href: '/logo.png' },
+        { rel: 'apple-touch-icon', type: 'image/png', href: '/logo.png' } // برای iOS
       ]
     }
   },

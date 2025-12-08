@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-sm p-4 shadow-lg rounded-5" style="max-width: 400px; width: 100%;">
       <h2 class="text-center mb-4"><i class="bi bi-box-arrow-in-right ms-1"></i>
       وارد شوید!
       </h2>
@@ -51,7 +51,7 @@
 
         <p class="text-center mt-3">
           حساب کاربری ندارید؟ 
-          <NuxtLink to="/auth/register">ثبت‌نام</NuxtLink>
+          <NuxtLink to="/auth/signup-step-one">ثبت‌نام</NuxtLink>
         </p>
         <p class="mb-0 text-center">
           <NuxtLink to="/" class="text-decoration-none">رمز عبور خود را فراموش کرده‌اید؟</NuxtLink>

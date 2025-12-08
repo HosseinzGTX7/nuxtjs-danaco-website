@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-sm p-4 shadow-lg rounded-5" style="max-width: 400px; width: 100%;">
       <h2 class="text-center mb-4">ثبت‌نام کاربر</h2>
       
       <Form :validation-schema="schema" :initial-values="{ terms: false }" @submit="handleRegister" v-slot="{ submitCount }">
@@ -23,21 +23,21 @@
         </div>
 
         <div class="mb-2">
-          <label for="mobile" class="form-label">شماره تلفن</label>
+          <label for="email" class="form-label">ایمیل</label>
           <div class="input-group flex-row-reverse">
             <span class="input-group-text p-2 border-0 bg-transparent">
-              <i class="bi bi-telephone"></i>
+              <i class="bi bi-envelope"></i>
             </span>
            <Field 
-              id="mobile"
-              name="mobile"
-              type="tel"
+              id="email"
+              name="email"
+              type="email"
               class="form-control text-end rounded-4"
-              placeholder="شماره تلفن خود را وارد کنید"
+              placeholder="ایمیل خود را وارد کنید"
               style="direction: rtl;"
             />
           </div>
-          <ErrorMessage name="mobile" class="text-danger small mt-1" />
+          <ErrorMessage name="email" class="text-danger small mt-1" />
         </div>
 
         <div class="mb-2">
@@ -101,22 +101,17 @@
 </template>
 
 <script setup>
-
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 
-
 const schema = yup.object({
   name: yup.string().required('نام و نام خانوادگی الزامی است').min(3, 'نام حداقل ۳ کاراکتر باشد'),
-  mobile: yup.string()
-    .required('شماره تلفن الزامی است')
-    .matches(/^09\d{9}$/, 'شماره تلفن باید با 09 شروع شود و 11 رقم باشد'),
+  email: yup.string().required('ایمیل الزامی است').email('ایمیل معتبر نیست'),
   password: yup.string().required('رمز عبور الزامی است').min(8, 'رمز عبور باید حداقل ۸ کاراکتر باشد'),
   confirmPassword: yup.string()
     .oneOf([yup.ref('password')], 'تکرار رمز عبور باید با رمز عبور یکسان باشد')
     .required('تکرار رمز عبور الزامی است'),
-   terms: yup.boolean()
-    .oneOf([true], 'برای ثبت‌نام باید قوانین سایت را بپذیرید')
+  terms: yup.boolean().oneOf([true], 'برای ثبت‌نام باید قوانین سایت را بپذیرید')
 })
 
 function handleRegister(values) {
