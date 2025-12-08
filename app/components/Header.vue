@@ -160,7 +160,7 @@ const closeMenu = () => {
 <style scoped>
 /* نوار بالایی */
 .top-bar {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background-color: var(--header-top-bg);
   border-bottom: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }

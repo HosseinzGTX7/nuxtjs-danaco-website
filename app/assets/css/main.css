@@ -18,3 +18,11 @@ body {
 [data-bs-theme="dark"] .btn {
   border: 1px solid #8c8b8b; /* سفید باریک */
 }
+
+:root[data-bs-theme='light'] {
+  --header-top-bg: #fcfdff;
+}
+
+:root[data-bs-theme='dark'] {
+  --header-top-bg: #1e1e1e;
+}
