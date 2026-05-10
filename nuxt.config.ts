@@ -13,7 +13,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/logo.png' },
-        { rel: 'apple-touch-icon', type: 'image/png', href: '/logo.png' } // برای iOS
+        { rel: 'apple-touch-icon', type: 'image/png', href: '/logo.png' }
       ]
     }
   },
