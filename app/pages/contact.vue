@@ -59,9 +59,9 @@
         <div class="card shadow-sm p-4 h-100">
           <h5 class="fw-bold mb-3">راه‌های ارتباطی</h5>
           <ul class="list-unstyled mb-4">
-            <li class="mb-2"><i class="bi bi-telephone text-primary ms-2"></i> تلفن: 8067-345-0912</li>
-            <li class="mb-2"><i class="bi bi-envelope text-primary ms-2"></i> ایمیل: danaco.info@gmail.com</li>
-            <li><i class="bi bi-geo-alt text-primary ms-2"></i> آدرس: خراسان رضوی، کاشمر، خیابان امام خمینی (ره)</li>
+            <li class="mb-2"><i class="bi bi-telephone text-primary ms-2"></i> تلفن: *******0915</li>
+            <li class="mb-2"><i class="bi bi-envelope text-primary ms-2"></i> ایمیل: danaco.test@gmail.com</li>
+            <li><i class="bi bi-geo-alt text-primary ms-2"></i> آدرس: خراسان رضوی</li>
           </ul>
 
           <h6 class="fw-bold mt-4">ساعت کاری</h6>

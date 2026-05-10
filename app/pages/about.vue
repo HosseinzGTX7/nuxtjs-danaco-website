@@ -25,15 +25,15 @@
           <ul class="list-group list-group-flush" style="direction: rtl;">
             <li class="list-group-item d-flex align-items-center justify-content-start">
               <span class="text-primary ms-2">•</span>
-              <span>مدیر: زهرا اسماعیل زاده</span>
+              <span>مدیر: حسین زحمتکش</span>
             </li>
             <li class="list-group-item d-flex align-items-center justify-content-start">
               <span class="text-primary ms-2">•</span>
-              <span>مربی ارشد: زهرا اسماعیل زاده </span>
+              <span>مربی ارشد: فاطمه توکلی</span>
             </li>
             <li class="list-group-item d-flex align-items-center justify-content-start">
               <span class="text-primary ms-2">•</span>
-              <span>مسئول ایمنی: زهرا اسماعیل زاده</span>
+              <span>مسئول ایمنی: زهرا ایمانی</span>
             </li>
         </ul>
 

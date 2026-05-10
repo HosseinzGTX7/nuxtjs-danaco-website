@@ -82,7 +82,7 @@
             </ul>
 
             <div class="contact-info d-flex align-items-center ms-4">
-              <span class="fw-bold">0912-123-4567</span>
+              <span class="fw-bold">0912-***-****</span>
               <i class="bi bi-telephone-inbound me-2"></i>
             </div>
           </div>

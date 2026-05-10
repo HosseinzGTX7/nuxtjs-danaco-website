@@ -10,15 +10,15 @@
             <div class="contact-info">
               <p class="mb-2 d-flex align-items-center">
                 <i class="bi bi-geo-alt-fill ms-2 icon-primary"></i>
-                خراسان رضوی، کاشمر، خیابان تیر
+                خراسان رضوی
               </p>
               <p class="mb-2 d-flex align-items-center">
                 <i class="bi bi-telephone-fill ms-2 icon-primary"></i>
-                552-23-334
+                552-**-***
               </p>
               <p class="mb-2 d-flex align-items-center">
                 <i class="bi bi-envelope-fill ms-2 icon-primary"></i>
-                info@danaco.com
+                test@danaco.com
               </p>
             </div>
           </div>

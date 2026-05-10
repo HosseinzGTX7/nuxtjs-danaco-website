@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', () => {
     id: 1,
     name: 'علی رایی',
     email: 'ali@example.com',
-    phone: '09121234567',
+    phone: '0912*******',
     avatar: '/images/IMG_20251005_131532_368.webp', // مسیر آواتار (داخل public/images بذار)
     joinedAt: '2024-03-12' // یا تاریخ مناسب
   })
